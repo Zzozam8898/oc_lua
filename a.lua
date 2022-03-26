@@ -72,13 +72,13 @@ end
 
 
 function cb (prefix, command, args, message)
-    if prefix == "#cum" then
+    if args[1] == "#cum" then
         if message == "!asp" then
             local asp = component.tileextendednode.getAspectsSum()
             local aspp = rw(asp)
             i=1
             for k, v in pairs(aspp) do
-                sock:write(v..' - '..(-k))
+                sock:write(v..' - '..(-tonumber(k)))
                 i= i+1
                 if i==11 then
                     return
