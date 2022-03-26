@@ -72,7 +72,6 @@ end
 
 
 function cb (prefix, command, args, message)
-    if args[1] == "#cum" then
         if message == "!asp" then
             local asp = component.tileextendednode.getAspectsSum()
             local aspp = rw(asp)
@@ -84,10 +83,7 @@ function cb (prefix, command, args, message)
                     return
                 end
             end
-            
         end
-    end
-
 end
 
 
