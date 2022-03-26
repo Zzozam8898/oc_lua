@@ -64,7 +64,7 @@ end
 local function rw(t)
     r={}
     for key, value in pairs(t) do
-        r[value]=-key
+        r[-value]=key
     end
 
     return r
@@ -77,7 +77,8 @@ function cb (prefix, command, args, message)
             local aspp = rw(asp)
             i=1
             for k, v in pairs(aspp) do
-                sock:write(v..' - '..(-tonumber(k)))
+                sock:write(v..' - '..(-tonumber(k)).. "\r\n")
+                sock:flush()
                 i= i+1
                 if i==11 then
                     return
