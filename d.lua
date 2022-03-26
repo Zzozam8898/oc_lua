@@ -60,7 +60,7 @@ local function name(identity)
 end
 
 local function send(msg)
-    line = "PRIVMSG " .. '#cum' .. " :" .. a
+    line = "PRIVMSG " .. '#cum' .. " :" .. msg
     sock:write(line.."\r\n")
     sock:flush()
 end
