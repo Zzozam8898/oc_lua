@@ -64,7 +64,7 @@ end
 local function rw(t)
     r={}
     for key, value in pairs(t) do
-        r[value]=key
+        r[value]=-key
     end
 
     return r
@@ -76,7 +76,15 @@ function cb (prefix, command, args, message)
         if message == "!asp" then
             local asp = component.tileextendednode.getAspectsSum()
             local aspp = rw(asp)
-            sock:write(aspp)
+            i=1
+            for k, v in pairs(aspp) do
+                sock:write(v..' - '..(-k))
+                i= i+1
+                if i==11 then
+                    return
+                end
+            end
+            
         end
     end
 
