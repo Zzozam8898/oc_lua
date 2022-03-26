@@ -19,7 +19,7 @@ local text = require("text")
 local args, options = shell.parse(...)
 
 
-local nick = args[1] or "JamBot
+local nick = args[1] or "JamBot"
 local host = args[2] or "irc.freenode.net:6667"
 
 if not host:find(":") then
