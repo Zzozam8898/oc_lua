@@ -17,12 +17,9 @@ local term = require("term")
 local text = require("text")
 
 local args, options = shell.parse(...)
-if #args < 1 then
-  print("Usage: irc <nickname> [server[:port]]")
-  return
-end
 
-local nick = args[1]
+
+local nick = args[1] or "JamBot"
 local host = args[2] or "irc.esper.net:6667"
 
 if not host:find(":") then
