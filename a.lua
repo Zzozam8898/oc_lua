@@ -3,7 +3,8 @@
 
 local component = require("component")
 local computer = require("computer")
-
+local filesystem = require("filesystem")
+local os = require("os")
 if not component.isAvailable("internet") then
   io.stderr:write("OpenIRC requires an Internet Card to run!\n")
   return
@@ -61,6 +62,12 @@ local function name(identity)
   return identity and identity:match("^[^!]+") or identity or "Anonymous"
 end
 
+local function send(msg)
+    line = "PRIVMSG " .. '#cum' .. " :" .. a
+    sock:write(line.."\r\n")
+    sock:flush()
+end
+
 local function rw(t)
     r={}
     for key, value in pairs(t) do
@@ -70,6 +77,17 @@ local function rw(t)
     return r
 end
 
+local function getTPS()
+    local function time()
+        local f = io.open("/tmp/TPS","w")
+        f:write("test")
+        f:close()
+        return(filesystem.lastModified("/tmp/TPS"))
+    end
+    local realTimeOld = time()
+    os.sleep(1)
+    return math.min(20, math.floor((20000 / (time() - realTimeOld))*100)/100)
+end
 
 function cb (prefix, command, args, message)
     if message == "!asp" then
@@ -78,14 +96,10 @@ function cb (prefix, command, args, message)
         i=1
         for k, v in pairs(aspp) do
             a = v..' - '..(-tonumber(k))
-            line = "PRIVMSG " .. '#cum' .. " :" .. a
-            sock:write(line.."\r\n")
-            sock:flush()
-            i= i+1
-            if i==11 then
-                return
-            end
+            send(a)
         end
+    elseif message == "!tps" then
+        send(getTPS())
     end
 end
 
