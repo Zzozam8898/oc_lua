@@ -72,19 +72,21 @@ end
 
 
 function cb (prefix, command, args, message)
-        if message == "!asp" then
-            local asp = component.tileextendednode.getAspectsSum()
-            local aspp = rw(asp)
-            i=1
-            for k, v in pairs(aspp) do
-                sock:write(v..' - '..(-tonumber(k)).. "\r\n")
-                sock:flush()
-                i= i+1
-                if i==11 then
-                    return
-                end
+    if message == "!asp" then
+        local asp = component.tileextendednode.getAspectsSum()
+        local aspp = rw(asp)
+        i=1
+        for k, v in pairs(aspp) do
+            a = v..' - '..(-tonumber(k))
+            line = "PRIVMSG " .. '#cum' .. " :" .. a
+            sock:write(line.."\r\n")
+            sock:flush()
+            i= i+1
+            if i==11 then
+                return
             end
         end
+    end
 end
 
 
