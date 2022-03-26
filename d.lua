@@ -20,7 +20,7 @@ local args, options = shell.parse(...)
 
 
 local nick = args[1] or "JamBot"
-local host = args[2] or "irc.esper.net:6667"
+local host = args[2] or "irc.freenode.net:6667"
 
 if not host:find(":") then
   host = host .. ":6667"
@@ -194,7 +194,9 @@ local function handleCommand(prefix, command, args, message)
 
   ---------------------------------------------------
   -- General commands
-
+  elseif command == commands.RPL_HOSTHIDDEN then
+    sock:write("JOIN #cum".. "\r\n")
+    sock:flush()
   elseif command == "NICK" then
     local oldNick, newNick = name(prefix), tostring(args[1] or message)
     if oldNick == nick then
