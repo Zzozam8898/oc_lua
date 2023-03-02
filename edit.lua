@@ -304,6 +304,7 @@ local function callback(message)
         event.push("ae2_loop")
     elseif starts(message, 'checke') then
         event.push("crafting", {label="Cum", wanted=9}, 5, 6)
+        print("Ev sended")
     elseif starts(message, "tps") then
         sendMsg(getTPS())
     elseif starts(message, "download") then
