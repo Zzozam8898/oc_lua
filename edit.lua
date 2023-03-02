@@ -290,6 +290,7 @@ local function callback(message)
         loadfile("/bin/wget.lua")("-f", "https://pastebin.com/raw/PFNc0fZe", "/home/irc")
         os.sleep(2)
         sendMsg("Bye!")
+        event.push("exit")
         computer.shutdown(true)
     elseif starts(message, 'count') then
         if sel ~= nil then
