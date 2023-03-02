@@ -232,11 +232,10 @@ local function callback(message)
     elseif starts(message, "modsearch") then
             local words = processMessage(message)
             if words[1] then
-                local str = map2(words)
-                print(str)
+                print(words[1])
                 search = {}
                 for k,r in pairs(recipes) do
-                    if string.find(string.lower(r.item.name), string.lower(str)) then
+                    if string.find(string.lower(r.item.name), string.lower(words[1])) then
                         print(dump(r))
                         r["key"] = k
                         table.insert(search, r)
@@ -325,6 +324,22 @@ local function callback(message)
         local words = processMessage(message)
         sendMsg(words[1].."  /home/"..words[2])
         loadfile("/bin/wget.lua")("-f", words[1], "/home/"..words[2])
+    elseif starts(message, "request") then
+        if sel ~= nil then
+            if words[1] then
+                local words = processMessage(message)
+                local craftable = component.me_controller.getCraftables(sel.item)
+                if craftable then
+                    craftable.request(tonumber(words[1]))
+                    sendMsg("Requested "..prettyItem(sel).." X"..words[1])
+                else 
+                    sendMsg("No recipe")
+                end
+            end
+        else
+            sendMsg ("use 'select' first")
+            return
+        end
     else
         sendMsg("Unknown command, use 'help'")
     end
