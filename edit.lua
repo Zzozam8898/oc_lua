@@ -86,7 +86,7 @@ local function getTPS()
         local f = io.open("/tmp/TF", "w")
         f:write("test")
         f:close()
-        return(fs.lastModified("/tmp/TF"))
+        return(filesystem.lastModified("/tmp/TF"))
     end
     local RO, RN, RD, TPS =  0, 0, 0
     local RO = time()
