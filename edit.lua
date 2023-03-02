@@ -220,16 +220,31 @@ local function callback(message)
             print(str)
             search = {}
             for k,r in pairs(recipes) do
-                
                 if string.find(string.lower(r.label), string.lower(str)) then
                     print(dump(r))
                     r["key"] = k
                     table.insert(search, r)
                 end
             end
-        prettyPrintItems(search)
-        return
+            prettyPrintItems(search)
+            return
         end
+    elseif starts(message, "modsearch") then
+            local words = processMessage(message)
+            if words[1] then
+                local str = map2(words)
+                print(str)
+                search = {}
+                for k,r in pairs(recipes) do
+                    if string.find(string.lower(r.item.name), string.lower(str)) then
+                        print(dump(r))
+                        r["key"] = k
+                        table.insert(search, r)
+                    end
+                end
+                prettyPrintItems(search)
+                return
+            end
     elseif starts(message, "select") then
         local words = processMessage(message)
         if words[1] then
