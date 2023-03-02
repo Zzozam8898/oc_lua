@@ -284,10 +284,9 @@ local function callback(message)
         local words = processMessage(message)
         sendMsg(dump(recipes[tonumber(words[1])]))
     elseif starts(message, 'upgrade') then
-
-        sendMsg("https://pastebin.com/raw/eCd3P2SB".."  /home/ae2")
+        sendMsg("https://github.com/Zzozam8898/oc_lua/raw/main/ae2.lua".."  /home/ae2")
         loadfile("/bin/wget.lua")("-f", "https://pastebin.com/raw/eCd3P2SB", "/home/ae2")
-        sendMsg("https://pastebin.com/raw/PFNc0fZe".."  /home/irc")
+        sendMsg("https://github.com/Zzozam8898/oc_lua/raw/main/edit.lua".."  /home/irc")
         loadfile("/bin/wget.lua")("-f", "https://pastebin.com/raw/PFNc0fZe", "/home/irc")
         os.sleep(2)
         sendMsg("Bye!")
@@ -305,6 +304,10 @@ local function callback(message)
         event.push("crafting", {label="Cum", wanted=9}, 5, 6)
     elseif starts(message, "tps") then
         sendMsg(getTPS())
+    elseif starts(message, "download") then
+        local words = processMessage(message)
+        sendMsg(words[1].."  /home/"..words[2])
+        loadfile("/bin/wget.lua")("-f", words[1], "/home/"..words[2])
     else
         sendMsg("Unknown command, use 'help'")
     end
