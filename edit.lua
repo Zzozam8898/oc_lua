@@ -291,7 +291,6 @@ local function callback(message)
         os.sleep(2)
         sendMsg("Bye!")
         socket:close()
-        event.push("exit")
         computer.shutdown(true)
     elseif starts(message, 'count') then
         if sel ~= nil then
